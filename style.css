@@ -7,10 +7,6 @@ Prénom : İlber
 
 */
 
-    /*
-    Problèmes : (1.2.3)
-    */
-
 body {
     background-color: rgb(120, 181, 169);
     font-family: sans-serif;
@@ -32,6 +28,9 @@ button {
 /*     position: relative;
     transition: .4s ease-in;
     z-index: 1; */
+    padding: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 button:hover {
@@ -41,7 +40,7 @@ button:hover {
 div#puzzlearea {
     width: 368px;
     height: 368px;
-    border: 5px dotted red;
+    /* border: 5px dotted red; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -54,7 +53,9 @@ div#puzzlearea {
     border: 1px solid purple;
     width: 90px;
     height: 90px;
-    background-color: orange;
+    background-color: rgb(222, 182, 92);
+    text-align: center;
+    position: relative;
 }
 
 .tuile img {
@@ -64,7 +65,6 @@ div#puzzlearea {
 
 /* test edilcek sonu */
 .tuile p {
-    text-align: center;
     color: rgb(105, 105, 105);
     font-size: 110%;
     text-shadow: 1px 0 0 #fff,
@@ -76,86 +76,12 @@ div#puzzlearea {
     1px -1px 0 #fff,
     -1px 1px 0 #fff;
     position: absolute;
-    top: 30%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
-
-/* 
-button::before,
-button::after {
-    position: absolute;
-    content: "";
-    z-index: -1;
-}
-
-button::after {
-    height: 100%;
-    left: -35%;
-    top: 0;
-    transform: skew(50deg);
-    transition-duration:0,6s;
-    transform-origin: top left;
-    width: 0;
-}
-
-button:hover:after {
-    height: 100%;
-    width: 135%;
-}
-*/
 
 /*
-button{
-  appearance: none;
-  background-color: #2ea44f;
-  border: 1px solid rgba(27, 31, 35, .15);
-  border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 6px 16px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
-button:focus:not(:focus-visible):not(.focus-visible) {
-  box-shadow: none;
-  outline: none;
-}
-
-button:hover {
-  background-color: #2c7197;
-}
-
-button:focus {
-  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-  outline: none;
-}
-
-button:disabled {
-  background-color: #94d3a2;
-  border-color: rgba(27, 31, 35, .1);
-  color: rgba(255, 255, 255, .8);
-  cursor: default;
-}
-
-button:active {
-  background-color: #298e46;
-  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
-}
-*/
-
 button {
     padding: 0.8em 1.8em;
     border: 2px solid #010702;
@@ -192,3 +118,4 @@ button:hover::before {
 button:hover {
     color: #111;
 }
+*/
