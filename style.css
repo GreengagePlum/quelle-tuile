@@ -59,10 +59,10 @@ div#puzzlearea {
     height: 100%;
 }
 
-/* test edilcek sonu */
 .tuile p {
     color: rgb(105, 105, 105);
     font-size: 110%;
+    /* La propriète "text-shadow" ajoute un effet d'ombre au text. */
     text-shadow: 1px 0 0 #fff,
     -1px 0 0 #fff,
     0 1px 0 #fff,
