@@ -12,30 +12,26 @@ function alea(min, max){ // [0;15[
 }
 
 $(document).ready(
-    function() {
+    function() { // chargement des images
         for (let i = 0; i < 16; i++) {
             if (i == 15) {
                 var pathFull = "<div class='tuile' id='t0" + i + "'><p>" + i + "</p></div>";
             } else {
                 var pathFull = "<div class='tuile' id='t0" + i + "'><img src='img/0" + i + ".jpg'/><p>" + i + "</p></div>";
             }
-            // alert(pathFull);
             $("#puzzlearea").append(pathFull);
 
             var idTag = "#t0" + i;
-            // alert(idTag);
             $(idTag).css("order", String(i + 1));
-            // alert($(idTag).css("order"));
         }
-        // $("#t015").css("order", "1");
-        // $("#t00").css("order", "16");
 
-        $("#shuffle").click(
+
+        $("#shuffle").click( // fonction pour mélanger les tuiles
             function shuffle() {
                 for (let i = 0; i < 50; i++) {
                     var n = alea(0,16);
                     var m = alea(0,16);
-                    if (n == m){
+                    if (n == m) {
                         i--;
                     }
                     var idTag1 = "#t0" + n;
@@ -48,19 +44,152 @@ $(document).ready(
             }
         );
 
-        $(".tuile").click(
+        $(".tuile").click( // fonction pour changer la place d'une tuile avec celle de la tuile vide
             function check_and_swap() {
-                alert("The order value of clicked element is (" + $(this).css("order") + ")");
-                // à contiunuer d'ici...
+                var ordClicked = $(this).css("order");
+                var idClicked = "#" + $(this).attr("id");
+                $(".tuile").each(
+                    function() {
+                        var ordMatch = $(this).css("order");
+                        var idMatch = "#" + $(this).attr("id");
+                        if (![1, 5, 9, 13].includes(parseInt(ordClicked))) {
+                            if (ordMatch == parseInt(ordClicked) - 1 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                        if (![4, 8, 12, 16].includes(parseInt(ordClicked))) {
+                            if (ordMatch == parseInt(ordClicked) + 1 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                        if (ordClicked <= 12) {
+                            if (ordMatch == parseInt(ordClicked) + 4 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                        if (ordClicked >= 5) {
+                            if (ordMatch == parseInt(ordClicked) - 4 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                    }
+                );
+
+                var countCorrect = 0;
+                $(".tuile").each( // fonction pour vérifier l'ordre
+                    function() {
+                        var ord = $(this).css("order");
+                        var id = $(this).attr("id");
+                        if (parseInt(id.slice(1)) + 1 == parseInt(ord)) {
+                            countCorrect++;
+                            if (countCorrect == 16) {
+                                $("#output").append("Bien joué, vous avez gagné !");
+                            }
+                        }
+                    }
+                );
             }
         );
     }
 );
 
-// var tuileOrd = $("#t015").css("order");
-// var tuileNum = $("#t015 p").text();
-// var tuileOrd2 = getComputedStyle(document.getElementById("t015")).getPropertyValue("order");
-// alert(String(tuileOrd));
-// alert(String(tuileNum));
 
+/* (Version 1)
 
+        $(".tuile").click(
+            function check_and_swap() {
+                // alert("The order value of clicked element is (" + $(this).css("order") + ")");
+                var ordClicked = $(this).css("order");
+                var idClicked = "#" + $(this).attr("id");
+                if (![1, 5, 9, 13].includes(parseInt(ordClicked))) {
+                    $(".tuile").each(
+                        function() {
+                            var ordMatch = $(this).css("order");
+                            var idMatch = "#" + $(this).attr("id");
+                            if (ordMatch == ordClicked - 1 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                    );
+                }
+                if (![4, 8, 12, 16].includes(parseInt(ordClicked))) {
+                    $(".tuile").each(
+                        function() {
+                            var ordMatch = $(this).css("order");
+                            var idMatch = "#" + $(this).attr("id");
+                            if (ordMatch == ordClicked + 1 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                    );
+                }
+                if (ordClicked <= 12) {
+                    $(".tuile").each(
+                        function() {
+                            var ordMatch = $(this).css("order");
+                            var idMatch = "#" + $(this).attr("id");
+                            if (ordMatch == ordClicked + 4 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                    );
+                }
+                if (ordClicked >= 5) {
+                    $(".tuile").each(
+                        function() {
+                            var ordMatch = $(this).css("order");
+                            var idMatch = "#" + $(this).attr("id");
+                            if (ordMatch == ordClicked - 4 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                    );
+                }
+            }
+        );
+
+*/
+
+/* (Version 2)
+
+                $(".tuile").each(
+                    function check_and_swap() {
+                        var ordMatch = $(this).css("order");
+                        var idMatch = "#" + $(this).attr("id");
+                        // alert(ordClicked <= 12);
+                        if (![1, 5, 9, 13].includes(parseInt(ordClicked))) {
+                            if (ordMatch == parseInt(ordClicked) - 1 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                        if (![4, 8, 12, 16].includes(parseInt(ordClicked))) {
+                            if (ordMatch == parseInt(ordClicked) + 1 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                        if (ordClicked <= 12) {
+                            if (ordMatch == parseInt(ordClicked) + 4 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                        if (ordClicked >= 5) {
+                            if (ordMatch == parseInt(ordClicked) - 4 && idMatch == "#t015") {
+                                $(idClicked).css("order", ordMatch);
+                                $(idMatch).css("order", ordClicked);
+                            }
+                        }
+                    }
+                );
+
+*/
