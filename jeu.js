@@ -29,6 +29,31 @@ $(document).ready(
         }
         // $("#t015").css("order", "1");
         // $("#t00").css("order", "16");
+
+        $("#shuffle").click(
+            function shuffle() {
+                for (let i = 0; i < 50; i++) {
+                    var n = alea(0,16);
+                    var m = alea(0,16);
+                    if (n == m){
+                        i--;
+                    }
+                    var idTag1 = "#t0" + n;
+                    var idTag2 = "#t0" + m;
+                    var ord1 = $(idTag1).css("order");
+                    var ord2 = $(idTag2).css("order");
+                    $(idTag1).css("order", ord2);
+                    $(idTag2).css("order", ord1);
+                }
+            }
+        );
+
+        $(".tuile").click(
+            function check_and_swap() {
+                alert("The order value of clicked element is (" + $(this).css("order") + ")");
+                // à contiunuer d'ici...
+            }
+        );
     }
 );
 
@@ -38,24 +63,4 @@ $(document).ready(
 // alert(String(tuileOrd));
 // alert(String(tuileNum));
 
-$("#shuffle").click(
-    function shuffle() {
-        for (let i = 0; i < 50; i++) {
-            var n = alea(0,16);
-            var m = alea(0,16);
-            if (n == m){
-                i--;
-            }
-            var idTag1 = "#t0" + n;
-            var idTag2 = "#t0" + m;
-            $(idTag1).css("order", String(m + 1));
-            $(idTag2).css("order", String(n + 1));
-        }
-    }
-);
 
-$(".tuile").click(
-    function check_and_swap() {
-
-    }
-);
